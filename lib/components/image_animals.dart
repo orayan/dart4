@@ -1,4 +1,3 @@
-import 'package:dart4/utils/path_images.dart';
 import 'package:flutter/material.dart';
 
 class ImageAnimals extends StatelessWidget {
@@ -9,13 +8,10 @@ class ImageAnimals extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-        flex: 3,
         child: Container(
-          decoration: BoxDecoration(
-              borderRadius:
-                  const BorderRadius.vertical(top: Radius.circular(16)),
-              image:
-                  DecorationImage(fit: BoxFit.fill, image: AssetImage(image))),
-        ));
+      decoration: BoxDecoration(
+          borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+          image: DecorationImage(fit: BoxFit.fill, image: AssetImage(image))),
+    ));
   }
 }

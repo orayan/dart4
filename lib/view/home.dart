@@ -1,8 +1,7 @@
-import 'package:dart4/components/btn_animal.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:dart4/components/build_btn_animals.dart';
 import 'package:dart4/components/image_animals.dart';
 import 'package:dart4/utils/name_animals.dart';
-import 'package:dart4/utils/path_icons.dart';
 import 'package:dart4/utils/path_images.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +14,12 @@ class PageHome extends StatefulWidget {
 }
 
 class _PageHomeState extends State<PageHome> {
+  // * image animal
   String image = PathImage.animals;
+  // * audio
+  AudioCache audioCache = AudioCache();
+  AudioPlayer audioPlayer = AudioPlayer();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,27 +57,28 @@ class _PageHomeState extends State<PageHome> {
                 image: image,
               ),
               //*-- line
-              Divider(
+              const Divider(
                 thickness: 3,
                 color: Colors.black,
                 height: 0,
               ),
               //*-- buttons
-              BuildBtnAnimals()
-              // BtnAnimal(
-              //   name: NameAnimals.lion,
-              //   icon: PathIcons.lion,
-              //   onClick: () {
-              //     setState(() {
-              //       image = PathImage.lion;
-              //     });
-              //     print(PathImage.lion);
-              //   },
-              // ),
+              BuildBtnAnimals(
+                callBack: changeState,
+              )
             ],
           ),
         ),
       ),
     );
+  }
+
+  // Function
+  void changeState({required String image, required String audio}) async {
+    setState(() {
+      this.image = image;
+    });
+    audioPlayer.stop();
+    audioPlayer = await audioCache.play(audio);
   }
 }
